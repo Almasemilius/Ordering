@@ -1,0 +1,7 @@
+.wrapper{
+    width: 100%; height: max-content; display: flex;
+}
+
+.product-form{
+    width: 70%; justify-content: center; border:  2px solid black;
+}
