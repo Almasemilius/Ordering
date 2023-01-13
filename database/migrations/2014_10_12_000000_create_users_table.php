@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone_number');
+            $table->enum('role',['business','customer'])->default('customer');
             $table->rememberToken();
             $table->timestamps();
         });

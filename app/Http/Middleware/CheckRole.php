@@ -16,6 +16,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
+        if(auth()->user()->role == 'customer'){
+            return redirect()->back();
+        }
         return $next($request);
     }
 }

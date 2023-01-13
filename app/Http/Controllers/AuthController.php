@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -19,8 +20,22 @@ class AuthController extends Controller
         if($user){
             $checkPassword = Hash::check($request->password,$user->password);
             if($checkPassword){
-                dd("Logged In");
+                Auth::login($user,true);
             }
         }
     }
+
+    public function logout()
+    {
+            Auth::logout();
+            dd(auth()->user());
+
+    }
+
+    public function registerIndex(Request $request)
+    {
+        dd("Here");
+    }
+
+
 }

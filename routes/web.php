@@ -27,3 +27,5 @@ Route::post('post-product', [ProductController::class,'postProduct'])->name('pos
 Route::get('edit-product/{id}',[ProductController::class,'editProduct'])->name('edit.product');
 Route::post('update-product/{id}', [ProductController::class,'updateProduct'])->name('update.product');
 Route::get('delete-product/{id}', [ProductController::class,'deleteProduct'])->name('delete.product');
+Route::get('logout', [AuthController::class,'logout'])->name('logout');
+Route::get('register-index', [AuthController::class,'registerIndex']);
