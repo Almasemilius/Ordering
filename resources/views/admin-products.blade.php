@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.admin')
 
 @section('content')
 <div>
@@ -34,7 +34,8 @@
                         {{$product->price}}
                     </td>
                     <td>
-                        <a href="{{route('order.product',$product->id)}}">Order</a>
+                        <a href="{{route('edit.product',$product->id)}}">Edit</a>
+                        <a href="{{route('delete.product',$product->id)}}">Delete</a>
                     </td>
                 </tr>
                 @endforeach

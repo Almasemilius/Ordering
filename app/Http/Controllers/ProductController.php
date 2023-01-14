@@ -14,6 +14,12 @@ class ProductController extends Controller
         return view('index',compact('products'));
     }
 
+    public function adminProducts()
+    {
+        $products = Product::paginate(10);
+        return view('admin-products',compact('products'));
+    }
+
     public function addProduct(Request $request)
     {
         return view('product-management');

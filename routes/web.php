@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,8 @@ Route::post('update-product/{id}', [ProductController::class,'updateProduct'])->
 Route::get('delete-product/{id}', [ProductController::class,'deleteProduct'])->name('delete.product');
 Route::get('logout', [AuthController::class,'logout'])->name('logout');
 Route::get('register-index', [AuthController::class,'registerIndex']);
+Route::post('register', [AuthController::class,'register'])->name('register');
+
+Route::get('admin-products',[ProductController::class,'adminProducts'])->name('admin.products');
+Route::get('order-product/{productId}',[OrderController::class,'pressOrder'])->name('order.product');
+Route::get('confirm-order/{productId}',[OrderController::class,'confirmOrder'])->name('confirm.order');

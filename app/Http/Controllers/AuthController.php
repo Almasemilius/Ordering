@@ -21,6 +21,7 @@ class AuthController extends Controller
             $checkPassword = Hash::check($request->password,$user->password);
             if($checkPassword){
                 Auth::login($user,true);
+                return redirect()->route('home');
             }
         }
     }
@@ -28,13 +29,39 @@ class AuthController extends Controller
     public function logout()
     {
             Auth::logout();
-            dd(auth()->user());
+            return redirect()->route('home');
+
 
     }
 
     public function registerIndex(Request $request)
     {
-        dd("Here");
+        return view('register');
+    }
+
+    public function register(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required',
+            'passwordConfirm' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'phoneNumber' => 'required|unique:users,phone_number'
+        ]);
+        $name = $request->name;
+        $email = $request->email;
+        $password = $request->password;
+        $passwordConfirm = $request->passwordConfirm;
+        $phoneNumber = $request->phoneNumber;
+        if($password === $passwordConfirm){
+            $user = new User();
+            $user->name = $name;
+            $user->email = $email;
+            $user->phone_number = $phoneNumber;
+            $user->password = Hash::make($password);
+            $user->save();
+            return redirect()->route('login.index');
+        }
     }
 
 
