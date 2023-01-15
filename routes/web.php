@@ -32,12 +32,15 @@ Route::post('register', [AuthController::class, 'register'])->name('register');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('order-product/{productId}', [OrderController::class, 'pressOrder'])->name('order.product');
-    Route::get('confirm-order/{productId}', [OrderController::class, 'confirmOrder'])->name('confirm.order');
-    Route::get('card-info/{productId}', [OrderController::class, 'cardInfo'])->name('card.info');
-    Route::post('create-payment-method', [OrderController::class, 'createPaymentMethod'])->name('post.payment.method');
+    Route::middleware('customer')->group(function () {
+        Route::get('order-product/{productId}', [OrderController::class, 'pressOrder'])->name('order.product');
+        Route::get('confirm-order/{productId}', [OrderController::class, 'confirmOrder'])->name('confirm.order');
+        Route::get('card-info/{productId}', [OrderController::class, 'cardInfo'])->name('card.info');
+        Route::post('create-payment-method', [OrderController::class, 'createPaymentMethod'])->name('post.payment.method');
+    });
+
     Route::middleware('role')->group(function () {
-        Route::get('add-product', [ProductController::class, 'addProduct']);
+        Route::get('add-product', [ProductController::class, 'addProduct'])->name('add.product');
         Route::post('post-product', [ProductController::class, 'postProduct'])->name('post.product');
         Route::get('edit-product/{id}', [ProductController::class, 'editProduct'])->name('edit.product');
         Route::post('update-product/{id}', [ProductController::class, 'updateProduct'])->name('update.product');

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,13 +7,18 @@
     @vite('resources/css/app.css')
     <title>Document</title>
 </head>
-
-<body class="">
-    <nav class="nav main">
+<body>
+<nav class="nav main">
         <div class="wrapper">
             <ul>
                 <li>
-                    <a href="{{route('home')}}">Home</a>
+                    <a href="{{route('admin.products')}}">Home</a>
+                </li>
+                <li>
+                    <a href="{{route('add.product')}}">Add Product</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.products')}}">List Products</a>
                 </li>
                 <li>
                     @if (auth()->user())
@@ -28,5 +32,4 @@
     </nav>
     @yield('content')
 </body>
-
 </html>

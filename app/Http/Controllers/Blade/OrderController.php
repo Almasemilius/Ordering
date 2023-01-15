@@ -25,23 +25,32 @@ class OrderController extends Controller
 
     public function cardInfo($productId)
     {
-        // dd($productId);
         return view('card-info',compact('productId'));
     }
 
     public function createPaymentMethod(Request $request)
     {
-        $data = DB::transaction(function() use($request){
+        $this->validate($request,[
+            'address' => 'required',
+            'card_number' => 'required',
+            'expire_date' => 'required',
+        ]);
+        $order = DB::transaction(function() use($request){
 
             $userInfo = UserInformation::create(array_merge($request->all(),['user_id' => auth()->user()->id]));
-
-            $this->createOrder($request->productId,"card");
+            $data = $this->createOrder($request->productId,"card");
+            return $data;
         });
+        return view('confirmed-order', compact('order'));
+
     }
 
     public function confirmOrder($productId)
     {
-        $this->createOrder($productId, "cash");
+        $order = $this->createOrder($productId, "cash");
+
+        return view('confirmed-order', compact('order'));
+
     }
 
     public function createOrder($productId, $paymentMethod)
@@ -54,5 +63,8 @@ class OrderController extends Controller
              'payment_method' => $paymentMethod
             ]
          );
+
+         return $order;
+
     }
 }

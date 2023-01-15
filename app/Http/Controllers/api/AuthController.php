@@ -72,4 +72,12 @@ class AuthController extends Controller
             }
         }
     }
+
+    public function logout(Request $request)
+    {
+        $userId = $request->userId;
+        $user = User::findOrFail($userId);
+        $user->tokens()->delete();
+        return response()->json("Logged Out");
+    }
 }

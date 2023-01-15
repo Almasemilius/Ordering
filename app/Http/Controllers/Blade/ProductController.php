@@ -38,19 +38,22 @@ class ProductController extends Controller
     {
         $product = Product::findOrfail($id);
         $product->update($request->all());
-        // return redirect()->route('home');
-        // dd("Here");
-
+        return redirect()->back();
     }
 
     public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
+        return view('deleted-product');
     }
     public function postProduct(Request $request)
     {
-        // dd($request->all());
+        $this->validate($request, [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+        ]);
         $product = Product::create($request->all());
         if ($product) {
             return back();
