@@ -5,3 +5,7 @@
 .product-form{
     width: 70%; justify-content: center; border:  2px solid black;
 }
+
+.main{
+    background-color: #315ba9;
+}

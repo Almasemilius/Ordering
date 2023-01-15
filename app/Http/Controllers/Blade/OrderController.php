@@ -48,7 +48,7 @@ class OrderController extends Controller
     {
         $order = Order::create(
             [ 
-             'order_number' => Carbon::now()->format('YimHsd'),
+             'order_number' => Carbon::now()->format('YimHsd').auth()->user()->id,
              'product_id' => $productId,
              'user_id' => auth()->user()->id,
              'payment_method' => $paymentMethod
