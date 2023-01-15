@@ -7,7 +7,7 @@
         </div>
 
         <a href="{{route('confirm.order',$product->id)}}">Cash</a>
-        <a href="">Card</a>
+        <a href="{{route('card.info',$product->id)}}">Card</a>
     </div>
 </div>
 @endsection

@@ -15,7 +15,11 @@
                 <a href="{{route('home')}}">Home</a>
             </li>
             <li>
+                @if (auth()->user())
+                <a href="{{route('logout')}}">Logout</a>
+                @else
                 <a href="{{route('login.index')}}">Login</a>
+                @endif
             </li>
         </ul>
     </nav>
