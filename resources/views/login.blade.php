@@ -17,15 +17,20 @@
                     <div class="btn-group">
                         <div class="btn">
                             <button class="submit" type="submit">Login</button>
-
                         </div>
                         <div class="btn top-space">
                             <a href="{{route('register.index')}}">Register</a>
-
                         </div>
+
                     </div>
+                    @if(session()->has('perror'))
+                    <div class="errormsg">
+                        <p>stop</p>
+                    </div>
+                    @endif
                 </form>
             </div>
+
         </div>
     </div>
 </div>
